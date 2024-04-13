@@ -1,8 +1,6 @@
 import { useState } from 'react'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   async function logout() {
     const res = await fetch("/registration/logout/", {
       credentials: "same-origin", // include cookies!

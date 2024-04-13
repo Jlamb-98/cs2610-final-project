@@ -16,8 +16,7 @@ body {
 }
 
 .search-bar {
-  width: 25%;
-  /* height: 2em; */
+  min-width: 500px;
   padding: 16px;
   border-radius: 16px;
   border: none;
