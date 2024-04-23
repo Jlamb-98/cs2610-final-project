@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Outlet } from 'react-router-dom';
 
 function App() {
   async function logout() {
@@ -22,6 +23,7 @@ function App() {
         <input type='text' className='search-bar' placeholder='Search'/>
         <button onClick={logout}>Logout</button>
       </nav>
+      <Outlet />
     </>
   )
 }
