@@ -43,7 +43,7 @@ export const NewProduct = () => {
       return;
     }
 
-    // TODO: save product in database
+    // TODO: can I send the image with the other JSON objects?
     await api.post("/products/", {
       name,
       price,
@@ -51,7 +51,7 @@ export const NewProduct = () => {
       quantity,
     });
 
-    navigate(-1);
+    // navigate(-1);
   }
 
   return (
