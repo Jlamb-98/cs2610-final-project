@@ -1,11 +1,22 @@
 import { Link } from "react-router-dom"
+import { useProducts } from "../../utils/use_products"
 
 export const Home = () => {
+  const [products, productsLoading] = useProducts();
+
   return (
     <div>
-      <Link to={"/product/new"}>List New Product</Link>
+      <Link to="/product/new">List New Product</Link>
       <div>
-        Display products for sale here!!!
+        {
+          products.map(product => (
+            <div key={product.id} className="product">
+              <Link to={`/product/${product.id}`}>{product.name}</Link>
+              <span>${product.price}</span>
+              <span>{product.description}</span>
+            </div>
+          ))
+        }
       </div>
     </div>
   )
