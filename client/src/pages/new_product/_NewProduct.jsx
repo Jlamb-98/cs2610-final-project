@@ -12,6 +12,8 @@ export const NewProduct = () => {
   const navigate = useNavigate();
   const api = useApi();
 
+  console.log(image)
+
   function selectImage(e) {
     // TODO: can I add multiple images?
     console.log(e.target.files[0])
@@ -44,12 +46,26 @@ export const NewProduct = () => {
     }
 
     // TODO: can I send the image with the other JSON objects?
-    await api.post("/products/", {
+    // create product in database
+    const res = await api.post("/products/", {
       name,
       price,
       description,
       quantity,
     });
+
+    if (res.success !== true) {
+      setErrorMessage("An unknown error occurred while saving product");
+      return;
+    }
+
+    // create image associated with product
+    res = await api.uploadFile("/images/", "my_image", image)
+
+    if (res.success !== true) {
+      setErrorMessage("An unknown error occurred while saving image");
+      return;
+    }
 
     // navigate(-1);
   }

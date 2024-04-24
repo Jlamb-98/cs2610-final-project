@@ -18,6 +18,19 @@ class Api {
     return res.json();
   }
 
+  async uploadFile(url, name, file) {
+    const { csrftoken } = cookie.parse(document.cookie);
+    const formData = new FormData();
+    formData.append(name, file);
+    formData.append("csrfmiddlewaretoken", csrftoken);
+    const res = await fetch(url, {
+      method: "post",
+      credentials: "include",
+      body: formData
+    });
+    return res.json();
+  }
+
   get(url) {
     return this.makeRequest(url, "get");
   }
