@@ -6,6 +6,7 @@ import secrets
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpRequest
 from .models import Product, Image
+from pathlib import Path
 
 # Load manifest when server launches
 MANIFEST = {}
@@ -28,21 +29,22 @@ def index(req):
 @login_required
 def products(req: HttpRequest):
     if req.method == "POST":
-        body = json.loads(req.body)
-        name = body["name"]
-        price = int(body["price"])
-        description = body["description"]
-        quantity = int(body["quantity"])
+        name = req.POST.get('name')
+        price = int(req.POST.get('price'))
+        description = req.POST.get('description')
+        quantity = int(req.POST.get('quantity'))
 
+        # data validation
         if name == "":
             return JsonResponse({"success": False, "message": "No name provided"})
-        if price < 1:
-            return JsonResponse({"success": False, "message": "Price must be positive number"})
         if description == "":
             return JsonResponse({"success": False, "message": "No description provided"})
+        if price < 1:
+            return JsonResponse({"success": False, "message": "Price must be positive number"})
         if quantity < 1:
             return JsonResponse({"success": False, "message": "Quantity must be positive number"})
 
+        # create product in database
         product = Product(
             name=name,
             price=price,
@@ -52,17 +54,21 @@ def products(req: HttpRequest):
         )
         product.save()
 
+        # create image in database
+        new_file_name = secrets.token_hex(16)
+        extension = req.FILES["my_file"].name.split(".", maxsplit=1)[1]
+        file_path = f"/product_images/{new_file_name}.{extension}"
+        image = Image(
+            name=req.FILES["my_file"].name,
+            path=file_path,
+            product=product
+        )
+        image.save()
+
+        # save image to filesystem
+        with open(f"{Path.cwd()}{file_path}", "ab+") as f:
+            for chunk in req.FILES["my_file"].chunks():
+                f.write(chunk)
+
         return JsonResponse({"success": True})
 
-@login_required
-def images(req: HttpRequest):
-    print(req.FILES["my_image"])
-    new_image_name = secrets.token_hex(16)
-    extension = req.FILES["my_image"].name.split(".", maxsplit=1)[1]
-    file_path = f"/product_images/{new_image_name}.{extension}"
-    image = Image(
-        name=req.FILES["my_image"].name,
-        path=file_path,
-        # product=
-    )
-    return JsonResponse({"success": True})
