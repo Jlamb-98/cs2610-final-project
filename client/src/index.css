@@ -22,3 +22,24 @@ body {
   border: none;
   font-size: 1.5em;
 }
+
+form {
+  display: flex;
+  width: 500px;
+  flex-direction: column;
+  box-shadow: gray 2px 2px 4px;
+  border-radius: 2px;
+  padding: 8px;
+  margin: 8px;
+  gap: 8px;
+}
+
+form > div.button {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+textarea {
+  resize: vertical;
+}
