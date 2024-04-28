@@ -14,6 +14,7 @@ export const Home = () => {
               <Link to={`/product/${product.id}`}>{product.name}</Link>
               <span>${product.price}</span>
               <span>{product.description}</span>
+              <img src={`/images/${product.id}`} alt="" width={200}/>
             </div>
           ))
         }

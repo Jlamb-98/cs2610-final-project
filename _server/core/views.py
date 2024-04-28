@@ -4,7 +4,7 @@ import secrets
 from django.shortcuts import render
 from django.conf  import settings
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse, HttpRequest
+from django.http import JsonResponse, HttpRequest, FileResponse
 from django.forms.models import model_to_dict
 from .models import Product, Image
 from pathlib import Path
@@ -78,3 +78,7 @@ def products(req: HttpRequest):
 
         return JsonResponse({"products": products})
 
+def image(req: HttpRequest, id: int):
+    file = Image.objects.get(product_id=id)
+    f = open(f"{Path.cwd()}{file.path}", "rb")
+    return FileResponse(f, filename=file.name)

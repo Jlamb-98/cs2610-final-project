@@ -1,4 +1,6 @@
-- [ ] Make individual requests to server for product images
+E-Commerce Final Project TODO:
+
+- [x] Make individual requests to server for product images
 - [ ] Create images for new products in a separate endpoint
   - [ ] Might allow for adding multiple images to product
 - [ ] Create Product page
