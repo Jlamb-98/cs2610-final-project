@@ -20,6 +20,16 @@ main {
   align-items: center;
 }
 
+.icon-button {
+  cursor: pointer;
+  background-color: transparent;
+  color: inherit;
+  border: none;
+  text-decoration: none;
+  margin: 16px;
+  font-size: 2em;
+}
+
 .search-bar {
   min-width: 500px;
   padding: 16px;

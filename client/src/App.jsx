@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from "react-router-dom"
 import { Outlet } from 'react-router-dom';
 
 function App() {
@@ -21,7 +22,11 @@ function App() {
         <h1>AmZam</h1>
         {/* TODO: maybe implement this search */}
         <input type='text' className='search-bar' placeholder='Search'/>
-        <button onClick={logout}>Logout</button>
+        <div className='button-menu'>
+          <Link to="/product/new" className="material-symbols-outlined icon-button">add</Link>
+          <Link to="/shopping-cart" className="material-symbols-outlined icon-button">shopping_cart</Link>
+          <button className='material-symbols-outlined icon-button' onClick={logout}>Logout</button>
+        </div>
       </nav>
       <main>
         <Outlet />

@@ -6,7 +6,6 @@ export const Home = () => {
 
   return (
     <div>
-      <Link to="/product/new">List New Product</Link>
       <div className="product-list">
         {
           products.map(product => (
