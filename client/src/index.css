@@ -6,6 +6,11 @@ body {
   margin: 0;
 }
 
+main {
+  display: flex;
+  justify-content: center;
+}
+
 .nav {
   padding: 8px 16px;
   background-color: firebrick;
@@ -42,4 +47,23 @@ form > div.button {
 
 textarea {
   resize: vertical;
+}
+
+.product-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-width: 600px;
+  max-width: 1500px;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 250px;
+  padding: 16px;
+  margin: 8px;
+  box-shadow: gray 2px 2px 4px;
+  border-radius: 8px;
 }

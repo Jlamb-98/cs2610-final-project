@@ -7,7 +7,6 @@ export const useProducts = () => {
   const [loading, setLoading] = useState(true);
 
   async function loadProducts() {
-    // TODO: get product images, use multipart request?
     const {products} = await api.get("/products/");
     setProducts(products);
     setLoading(false);
