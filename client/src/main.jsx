@@ -7,6 +7,7 @@ import { createHashRouter, RouterProvider } from "react-router-dom";
 import { NewProduct } from './pages/new_product/_NewProduct.jsx'
 import { Product } from './pages/product/_Product.jsx'
 import { Home } from './pages/home/_Home.jsx'
+import { ShoppingCart } from './pages/shopping_cart/_ShoppingCart.jsx'
 
 
 const router = createHashRouter([
@@ -23,6 +24,9 @@ const router = createHashRouter([
       }, {
         path: "/product/:id",
         element: <Product />
+      }, {
+        path: "/shopping_cart/",
+        element: <ShoppingCart />
       }
     ]
   }

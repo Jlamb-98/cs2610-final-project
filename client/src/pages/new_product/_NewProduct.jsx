@@ -56,7 +56,7 @@ export const NewProduct = () => {
       return;
     }
 
-    navigate(-1);
+    navigate("/");
   }
 
   return (
