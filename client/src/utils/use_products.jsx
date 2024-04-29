@@ -9,7 +9,9 @@ export const useProducts = () => {
   async function loadProducts() {
     const {products} = await api.get("/products/");
     setProducts(products);
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
   }
 
   useEffect(() => {

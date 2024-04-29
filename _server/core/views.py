@@ -78,6 +78,13 @@ def products(req: HttpRequest):
 
         return JsonResponse({"products": products})
 
+@login_required
+def product(req: HttpRequest, id: int):
+    product = Product.objects.get(id=id)
+    product = model_to_dict(product)
+    return JsonResponse({"product": product})
+
+@login_required
 def image(req: HttpRequest, id: int):
     file = Image.objects.get(product_id=id)
     f = open(f"{Path.cwd()}{file.path}", "rb")
