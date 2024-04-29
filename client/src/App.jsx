@@ -19,7 +19,8 @@ function App() {
   return (
     <>
       <nav className='nav'>
-        <h1>AmZam</h1>
+      <h1><Link to="/">AmZam</Link></h1>
+        {/* <h1>AmZam</h1> */}
         {/* TODO: maybe implement this search */}
         <input type='text' className='search-bar' placeholder='Search'/>
         <div className='button-menu'>
