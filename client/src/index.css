@@ -92,3 +92,31 @@ textarea {
   padding: 16px;
   gap: 26px;
 }
+
+.shopping-cart {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  padding: 16px;
+}
+
+.cart-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.5em;
+  height: 200px;
+  width: 100%;
+  margin: 16px;
+  padding: 0px 16px 0px 16px;
+  gap: 8px;
+  box-shadow: gray 2px 2px 4px;
+  border-radius: 8px;
+}
+
+.cart-item img {
+  width: 200px;
+  border-radius: 8px;
+  height: fit-content;
+}

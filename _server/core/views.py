@@ -93,10 +93,9 @@ def image(req: HttpRequest, id: int):
 @login_required
 def shopping_cart_items(req: HttpRequest):
     items = CartItem.objects.filter(user=req.user)
+    products = [model_to_dict(Product.objects.get(id=item.product_id)) for item in items]
     items = [model_to_dict(item) for item in items]
-    print(items)
-    # TODO: need to return Product model, not CartItem model
-    return JsonResponse({"shoppingCart": items})
+    return JsonResponse({"shoppingCart": items, "products": products})
 
 @login_required
 def shopping_cart(req: HttpRequest, id: int):

@@ -2,8 +2,7 @@ import { Link } from "react-router-dom"
 import { useShoppingCart } from "../../utils/use_shopping_cart"
 
 export const ShoppingCart = () => {
-  const [shoppingCart, cartLoading] = useShoppingCart();
-
+  const [shoppingCart, products, cartLoading, deleteCartItem] = useShoppingCart();
   if (cartLoading) {
     return (
       <div>
@@ -13,19 +12,25 @@ export const ShoppingCart = () => {
   }
 
   return (
-    <div>
+    <>
       <div className="shopping-cart">
-        {
-          shoppingCart.map(item => {
-            <div key={item.id} className="item">
-              <img src={`/images/${item.id}/`} alt="Image not found"/>
-              <Link to={`/product/${item.id}`}>{item.name}</Link>
-              <span>${item.price}</span>
-              <span>{item.description}</span>
-            </div>
-          })
-        }
+        <h1>Shopping Cart</h1>
+          {
+            products.map(product => (
+              <div key={product.id} className="cart-item">
+                <img src={`/images/${product.id}/`} alt="Image not found"/>
+                <div>
+                  <Link to={`/product/${product.id}`}>{product.name}</Link>
+                  <div>${product.price}</div>
+                  <div>Qty:</div>
+                </div>
+                <button className="material-symbols-outlined icon-button" onClick={deleteCartItem(product.id)}>delete</button>
+              </div>
+            ))
+          }
+        <div>Total: $</div>
+        <button>Checkout</button>
       </div>
-    </div>
+    </>
   )
 }
