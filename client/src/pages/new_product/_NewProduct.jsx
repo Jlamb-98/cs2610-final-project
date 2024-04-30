@@ -1,8 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { useApi } from "../../utils/api";
+import { useParams } from "react-router-dom"
 
 export const NewProduct = () => {
+  const {id} = useParams();
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
@@ -11,6 +13,20 @@ export const NewProduct = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const api = useApi();
+
+  async function getProduct() {
+    const {product} = await api.get(`/products/${id}`);
+    setName(product.name);
+    setPrice(product.price);
+    setDescription(product.description);
+    setQuantity(product.quantity);
+  }
+
+  useEffect(() => {
+    if (id) {
+      getProduct();
+    }
+  }, []);
 
   function selectImage(e) {
     // TODO: can I add multiple images?
@@ -42,21 +58,35 @@ export const NewProduct = () => {
       return;
     }
 
-    // create product in database
-    const res = await api.post("/products/", {
-      name: name,
-      price: price,
-      description: description,
-      quantity: quantity,
-      file: image
-    }, true);
-
-    if (res.success !== true) {
-      setErrorMessage(res.message);
-      return;
+    if (id) {
+      // update product in database
+      const res = await api.post(`/products/${id}/`, {
+        name,
+        price,
+        description,
+        quantity
+      })
+      if (res.success !== true) {
+        setErrorMessage(res.message);
+        return;
+      }
+      navigate("/my_products");
+    } else {
+      // create product in database
+      const res = await api.post("/products/", {
+        name: name,
+        price: price,
+        description: description,
+        quantity: quantity,
+        file: image
+      }, true);
+      if (res.success !== true) {
+        setErrorMessage(res.message);
+        return;
+      }
+      navigate("/");
     }
 
-    navigate("/");
   }
 
   return (

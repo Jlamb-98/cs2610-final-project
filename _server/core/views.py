@@ -80,9 +80,19 @@ def products(req: HttpRequest):
 
 @login_required
 def product(req: HttpRequest, id: int):
-    product = Product.objects.get(id=id)
-    product = model_to_dict(product, exclude='customer')
-    return JsonResponse({"product": product})
+    if req.method == "POST":
+        body = json.loads(req.body)
+        Product.objects.filter(id=id).update(
+            name=body["name"],
+            price=body["price"],
+            description=body["description"],
+            quantity=body["quantity"],
+        )
+        return JsonResponse({"success": True})
+    else:
+        product = Product.objects.get(id=id)
+        product = model_to_dict(product, exclude='customer')
+        return JsonResponse({"product": product})
 
 @login_required
 def image(req: HttpRequest, id: int):
@@ -118,3 +128,10 @@ def shopping_cart(req: HttpRequest, id: int):
     if req.method == "PUT":
         # TODO: update product in user's cart (probably just quantity)
         pass
+
+@login_required
+def my_products(req: HttpRequest):
+    products = Product.objects.filter(user=req.user)
+    products = [model_to_dict(product, exclude='customer') for product in products]
+
+    return JsonResponse({"products": products})

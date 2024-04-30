@@ -9,6 +9,7 @@ import { Product } from './pages/product/_Product.jsx'
 import { Home } from './pages/home/_Home.jsx'
 import { ShoppingCart } from './pages/shopping_cart/_ShoppingCart.jsx'
 import { Checkout } from './pages/checkout/_Checkout.jsx'
+import { MyProducts } from './pages/my_products/_MyProducts.jsx'
 
 
 const router = createHashRouter([
@@ -23,6 +24,9 @@ const router = createHashRouter([
         path: "/product/new",
         element: <NewProduct />
       }, {
+        path: "/product/new/:id",
+        element: <NewProduct />
+      }, {
         path: "/product/:id",
         element: <Product />
       }, {
@@ -31,6 +35,9 @@ const router = createHashRouter([
       }, {
         path: "/checkout",
         element: <Checkout />
+      }, {
+        path: "/my_products",
+        element: <MyProducts />
       }
     ]
   }
