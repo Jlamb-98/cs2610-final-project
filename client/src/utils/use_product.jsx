@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useApi } from "./api"
+import { redirect } from "react-router-dom";
 
 export const useProduct = (id) => {
   const api = useApi();
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
   async function loadProduct() {
@@ -14,8 +15,9 @@ export const useProduct = (id) => {
     }, 500);
   }
 
-  async function addToCart() {
-
+  async function addToCart(quantity) {
+    const res = await api.post(`/shopping_cart/${product.id}/`, {quantity});
+    redirect("/shopping_cart/");
   }
 
   useEffect(() => {

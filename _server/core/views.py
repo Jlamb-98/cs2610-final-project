@@ -6,7 +6,7 @@ from django.conf  import settings
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpRequest, FileResponse
 from django.forms.models import model_to_dict
-from .models import Product, Image
+from .models import Product, Image, CartItem
 from pathlib import Path
 
 # Load manifest when server launches
@@ -89,3 +89,25 @@ def image(req: HttpRequest, id: int):
     file = Image.objects.get(product_id=id)
     f = open(f"{Path.cwd()}{file.path}", "rb")
     return FileResponse(f, filename=file.name)
+
+@login_required
+def shopping_cart(req: HttpRequest, id: int):
+    if req.method == "POST":
+        body = json.loads(req.body)
+        item = CartItem(
+            user=req.user,
+            product_id=id,
+            quantity=body["quantity"]
+        )
+        item.save()
+        return JsonResponse({"success": True})
+    if req.method == "DELETE":
+        # TODO: delete product from user's shopping cart
+        pass
+    if req.method == "PUT":
+        # TODO: update product in user's cart (probably just quantity)
+        pass
+    else:
+        items = CartItem.objects.filter(user=req.user)
+        items = [model_to_dict(item) for item in items]
+        return JsonResponse({"cartItems": items})

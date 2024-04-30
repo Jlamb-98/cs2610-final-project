@@ -14,6 +14,11 @@ class Image(models.Model):
     name = models.TextField()
     product = models.ForeignKey("Product", on_delete=models.CASCADE)
 
+class CartItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey("Product", on_delete=models.DO_NOTHING)
+    quantity = models.IntegerField()
+
 # implement a Review class if there is time
 # class Review(models.Model):
 #     header = models.TextField()
