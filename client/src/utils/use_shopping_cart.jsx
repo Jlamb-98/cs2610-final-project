@@ -15,8 +15,9 @@ export const useShoppingCart = () => {
     }, 500);
   }
 
-  async function deleteCartItem(id) {
-    // TODO: make a DELETE request to delete item from cart
+  async function deleteCartItem(item) {
+    setShoppingCart(shoppingCart.filter(i => i !== item))
+    await api.del(`/shopping_cart/${item.id}/`)
   }
 
   async function calculateTotal() {

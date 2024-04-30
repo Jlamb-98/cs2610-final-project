@@ -24,7 +24,7 @@ export const ShoppingCart = () => {
                   <div>${item.product.price}</div>
                   <div>Qty: {item.quantity}</div>
                 </div>
-                <button className="material-symbols-outlined icon-button" onClick={() => deleteCartItem(item.id)}>delete</button>
+                <button className="material-symbols-outlined icon-button" onClick={() => deleteCartItem(item)}>delete</button>
               </div>
             ))
           }
