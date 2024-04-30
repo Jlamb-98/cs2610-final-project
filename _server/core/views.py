@@ -91,6 +91,14 @@ def image(req: HttpRequest, id: int):
     return FileResponse(f, filename=file.name)
 
 @login_required
+def shopping_cart_items(req: HttpRequest):
+    items = CartItem.objects.filter(user=req.user)
+    items = [model_to_dict(item) for item in items]
+    print(items)
+    # TODO: need to return Product model, not CartItem model
+    return JsonResponse({"shoppingCart": items})
+
+@login_required
 def shopping_cart(req: HttpRequest, id: int):
     if req.method == "POST":
         body = json.loads(req.body)
@@ -107,7 +115,3 @@ def shopping_cart(req: HttpRequest, id: int):
     if req.method == "PUT":
         # TODO: update product in user's cart (probably just quantity)
         pass
-    else:
-        items = CartItem.objects.filter(user=req.user)
-        items = [model_to_dict(item) for item in items]
-        return JsonResponse({"cartItems": items})
