@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { useShoppingCart } from "../../utils/use_shopping_cart"
 
 export const ShoppingCart = () => {
-  const [shoppingCart, products, cartLoading, deleteCartItem] = useShoppingCart();
+  const [shoppingCart, total, cartLoading, deleteCartItem] = useShoppingCart();
   if (cartLoading) {
     return (
       <div>
@@ -16,19 +16,19 @@ export const ShoppingCart = () => {
       <div className="shopping-cart">
         <h1>Shopping Cart</h1>
           {
-            products.map(product => (
-              <div key={product.id} className="cart-item">
-                <img src={`/images/${product.id}/`} alt="Image not found"/>
+            shoppingCart.map(item => (
+              <div key={item.id} className="cart-item">
+                <img src={`/images/${item.product.id}/`} alt="Image not found"/>
                 <div>
-                  <Link to={`/product/${product.id}`}>{product.name}</Link>
-                  <div>${product.price}</div>
-                  <div>Qty:</div>
+                  <Link to={`/product/${item.product.id}/`}>{item.product.name}</Link>
+                  <div>${item.product.price}</div>
+                  <div>Qty: {item.quantity}</div>
                 </div>
-                <button className="material-symbols-outlined icon-button" onClick={deleteCartItem(product.id)}>delete</button>
+                <button className="material-symbols-outlined icon-button" onClick={() => deleteCartItem(item.id)}>delete</button>
               </div>
             ))
           }
-        <div>Total: $</div>
+        <div>Total: ${total}</div>
         <button>Checkout</button>
       </div>
     </>

@@ -11,7 +11,6 @@ export const Home = () => {
       </div>
     )
   }
-  console.log(products)
 
   return (
     <div className="product-list">
@@ -19,7 +18,7 @@ export const Home = () => {
         products.map(product => (
           <div key={product.id} className="product">
             <img src={`/images/${product.id}/`} alt="Image not found"/>
-            <Link to={`/product/${product.id}`}>{product.name}</Link>
+            <Link to={`/product/${product.id}/`}>{product.name}</Link>
             <span>${product.price}</span>
             <span>{product.description}</span>
           </div>

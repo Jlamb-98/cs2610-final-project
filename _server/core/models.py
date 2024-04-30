@@ -8,6 +8,7 @@ class Product(models.Model):
     description = models.TextField()
     quantity = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    customer = models.ManyToManyField(User, related_name="customer", through='CartItem')
 
 class Image(models.Model):
     path = models.TextField()
@@ -15,8 +16,8 @@ class Image(models.Model):
     product = models.ForeignKey("Product", on_delete=models.CASCADE)
 
 class CartItem(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey("Product", on_delete=models.DO_NOTHING)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey("Product", on_delete=models.CASCADE)
     quantity = models.IntegerField()
 
 # implement a Review class if there is time

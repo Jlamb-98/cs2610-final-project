@@ -4,14 +4,12 @@ import { useApi } from "./api"
 export const useShoppingCart = () => {
   const api = useApi();
   const [shoppingCart, setShoppingCart] = useState();
-  const [products, setProducts] = useState();
+  const [total, setTotal] = useState();
   const [loading, setLoading] = useState(true);
 
   async function loadShoppingCart() {
-    const {shoppingCart, products} = await api.get("/shopping_cart/");
-    // console.log(products)
+    const {shoppingCart} = await api.get("/shopping_cart/");
     setShoppingCart(shoppingCart);
-    setProducts(products);
     setTimeout(() => {
       setLoading(false);
     }, 500);
@@ -21,9 +19,14 @@ export const useShoppingCart = () => {
     // TODO: make a DELETE request to delete item from cart
   }
 
+  async function calculateTotal() {
+    setTotal(0);
+  }
+
   useEffect(() => {
     loadShoppingCart();
+    calculateTotal();
   }, [])
 
-  return [shoppingCart, products, loading, deleteCartItem];
+  return [shoppingCart, total, loading, deleteCartItem];
 }

@@ -74,14 +74,14 @@ def products(req: HttpRequest):
         return JsonResponse({"success": True})
     else:
         products = Product.objects.all()
-        products = [model_to_dict(product) for product in products]
+        products = [model_to_dict(product, exclude='customer') for product in products]
 
         return JsonResponse({"products": products})
 
 @login_required
 def product(req: HttpRequest, id: int):
     product = Product.objects.get(id=id)
-    product = model_to_dict(product)
+    product = model_to_dict(product, exclude='customer')
     return JsonResponse({"product": product})
 
 @login_required
@@ -92,17 +92,20 @@ def image(req: HttpRequest, id: int):
 
 @login_required
 def shopping_cart_items(req: HttpRequest):
-    items = CartItem.objects.filter(user=req.user)
-    products = [model_to_dict(Product.objects.get(id=item.product_id)) for item in items]
-    items = [model_to_dict(item) for item in items]
-    return JsonResponse({"shoppingCart": items, "products": products})
+    items = CartItem.objects.filter(customer=req.user)
+    new_items = []
+    for item in items:
+        updated_item = model_to_dict(item)
+        updated_item["product"] = model_to_dict(item.product, exclude='customer')
+        new_items.append(updated_item)
+    return JsonResponse({"shoppingCart": new_items})
 
 @login_required
 def shopping_cart(req: HttpRequest, id: int):
     if req.method == "POST":
         body = json.loads(req.body)
         item = CartItem(
-            user=req.user,
+            customer=req.user,
             product_id=id,
             quantity=body["quantity"]
         )
