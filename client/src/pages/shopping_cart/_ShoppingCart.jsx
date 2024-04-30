@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { useShoppingCart } from "../../utils/use_shopping_cart"
 
 export const ShoppingCart = () => {
-  const [shoppingCart, total, cartLoading, deleteCartItem] = useShoppingCart();
+  const [shoppingCart, total, cartLoading, deleteCartItem, checkout] = useShoppingCart();
   if (cartLoading) {
     return (
       <div>
@@ -30,7 +30,7 @@ export const ShoppingCart = () => {
           }
         <div className="total">Total: ${total}</div>
         <div className="button">
-          <Link to="/checkout/" className="rounded-button">Checkout</Link>
+          <button className="rounded-button" onClick={() => checkout()}>Checkout</button>
         </div>
       </div>
     </>
