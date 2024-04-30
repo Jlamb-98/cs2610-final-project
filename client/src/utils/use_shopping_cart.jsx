@@ -26,7 +26,6 @@ export const useShoppingCart = () => {
   async function calculateTotal(shoppingCart) {
     let total = 0;
     for (const item of shoppingCart) {
-      console.log(item);
       total += item.product.price * item.quantity;
     }
     setTotal(total);
@@ -34,7 +33,6 @@ export const useShoppingCart = () => {
 
   useEffect(() => {
     loadShoppingCart();
-    // calculateTotal();
   }, [])
 
   return [shoppingCart, total, loading, deleteCartItem];

@@ -77,7 +77,7 @@ export const NewProduct = () => {
       <textarea type="textarea" id="description" rows={10} value={description} onChange={e => setDescription(e.target.value)}/>
       <input type="file" onChange={selectImage} accept="image/*"/>
       <div className="button">
-        <button>List Product</button>
+        <button className="rounded-button">List Product</button>
       </div>
       <span className="error-message">{errorMessage}</span>
     </form>

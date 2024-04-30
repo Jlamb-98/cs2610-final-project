@@ -28,8 +28,10 @@ export const ShoppingCart = () => {
               </div>
             ))
           }
-        <div>Total: ${total}</div>
-        <button>Checkout</button>
+        <div className="total">Total: ${total}</div>
+        <div className="button">
+          <Link to="/checkout/" className="rounded-button">Checkout</Link>
+        </div>
       </div>
     </>
   )

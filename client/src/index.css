@@ -54,7 +54,7 @@ form {
   gap: 8px;
 }
 
-form > div.button {
+div.button {
   width: 100%;
   display: flex;
   justify-content: end;
@@ -84,6 +84,10 @@ textarea {
   border-radius: 8px;
 }
 
+.product > .name {
+  font-weight: bold;
+}
+
 .product-page {
   display: flex;
   flex-direction: row;
@@ -93,11 +97,18 @@ textarea {
   gap: 26px;
 }
 
+.product-page > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .shopping-cart {
   display: flex;
   flex-direction: column;
   width: 1000px;
   padding: 16px;
+  gap: 8px;
 }
 
 .cart-item {
@@ -108,15 +119,40 @@ textarea {
   font-size: 1.5em;
   height: 200px;
   width: 100%;
-  margin: 16px;
-  padding: 0px 16px 0px 16px;
+  padding-left: 16px;
   gap: 8px;
   box-shadow: gray 2px 2px 4px;
   border-radius: 8px;
 }
 
-.cart-item img {
+.total {
+  font-size: 1.5em;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+img {
+  border-radius: 4px;
+}
+
+.cart-item > img {
   width: 200px;
-  border-radius: 8px;
   height: fit-content;
+}
+
+.rounded-button {
+  font-size: 1.25em;
+  background-color: #EFC69B;
+  color: inherit;
+  border: none;
+  border-radius: 16px;
+  padding: 4px 16px;
+  box-shadow: gray 1px 2px 2px;
+  cursor: pointer;
+}
+
+.rounded-button:hover {
+  background-color: #DF9B6D;
 }

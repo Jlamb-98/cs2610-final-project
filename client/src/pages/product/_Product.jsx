@@ -26,7 +26,7 @@ export const Product = () => {
           <label htmlFor="quantity">Quantity </label>
           <input type="number" id="quantity" min={1} value={quantity} onChange={e => setQuantity(e.target.value)}/>
         </div>
-        <button className="add-to-cart" onClick={() => addToCart(quantity)}>Add to Cart</button>
+        <button className="rounded-button" onClick={() => addToCart(quantity)}>Add to Cart</button>
       </div>
     </div>
   )
