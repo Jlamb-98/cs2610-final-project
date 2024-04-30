@@ -10,23 +10,31 @@ export const useShoppingCart = () => {
   async function loadShoppingCart() {
     const {shoppingCart} = await api.get("/shopping_cart/");
     setShoppingCart(shoppingCart);
+    calculateTotal(shoppingCart);
     setTimeout(() => {
       setLoading(false);
     }, 500);
   }
 
   async function deleteCartItem(item) {
-    setShoppingCart(shoppingCart.filter(i => i !== item))
-    await api.del(`/shopping_cart/${item.id}/`)
+    const newShoppingCart = shoppingCart.filter(i => i !== item);
+    setShoppingCart(newShoppingCart);
+    await api.del(`/shopping_cart/${item.id}/`);
+    calculateTotal(newShoppingCart);
   }
 
-  async function calculateTotal() {
-    setTotal(0);
+  async function calculateTotal(shoppingCart) {
+    let total = 0;
+    for (const item of shoppingCart) {
+      console.log(item);
+      total += item.product.price * item.quantity;
+    }
+    setTotal(total);
   }
 
   useEffect(() => {
     loadShoppingCart();
-    calculateTotal();
+    // calculateTotal();
   }, [])
 
   return [shoppingCart, total, loading, deleteCartItem];

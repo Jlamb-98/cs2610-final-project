@@ -112,7 +112,6 @@ def shopping_cart(req: HttpRequest, id: int):
         item.save()
         return JsonResponse({"success": True})
     if req.method == "DELETE":
-        # TODO: delete product from user's shopping cart
         item = CartItem.objects.get(id=id)
         item.delete()
         return JsonResponse({"success": True})

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useApi } from "./api"
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const useProduct = (id) => {
   const api = useApi();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   async function loadProduct() {
     const {product} = await api.get(`/products/${id}`);
@@ -17,7 +18,7 @@ export const useProduct = (id) => {
 
   async function addToCart(quantity) {
     const res = await api.post(`/shopping_cart/${product.id}/`, {quantity});
-    redirect("/shopping_cart/");
+    navigate("/shopping_cart/");
   }
 
   useEffect(() => {

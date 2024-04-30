@@ -2,7 +2,7 @@ E-Commerce Final Project TODO:
 
 - [x] Make individual requests to server for product images
 - [x] Create Product page
-  - [ ] Add to cart button
+  - [x] Add to cart button
 - [ ] Create Shopping Cart page
   - [ ] Displays user's items in cart
 - [ ] Create images for new products in a separate endpoint
