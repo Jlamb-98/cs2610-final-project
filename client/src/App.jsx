@@ -22,7 +22,7 @@ function App() {
         {/* TODO: maybe implement this search */}
         <input type='text' className='search-bar' placeholder='Search'/>
         <div className='button-menu'>
-          <Link to="/my_products/" className="material-symbols-outlined icon-button">person</Link>
+          <Link to="/my_products" className="material-symbols-outlined icon-button">person</Link>
           <Link to="/product/new" className="material-symbols-outlined icon-button">add</Link>
           <Link to="/shopping_cart" className="material-symbols-outlined icon-button">shopping_cart</Link>
           <button className='material-symbols-outlined icon-button' onClick={logout}>Logout</button>

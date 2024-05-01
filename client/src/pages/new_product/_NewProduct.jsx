@@ -15,7 +15,11 @@ export const NewProduct = () => {
   const api = useApi();
 
   async function getProduct() {
-    const {product} = await api.get(`/products/${id}`);
+    const {product, success} = await api.get(`/my_products/${id}/`);
+    if (!success) {
+      navigate("/product/new");
+      return;
+    }
     setName(product.name);
     setPrice(product.price);
     setDescription(product.description);
@@ -70,7 +74,7 @@ export const NewProduct = () => {
         setErrorMessage(res.message);
         return;
       }
-      navigate("/my_products");
+      navigate("/my_products/");
     } else {
       // create product in database
       const res = await api.post("/products/", {

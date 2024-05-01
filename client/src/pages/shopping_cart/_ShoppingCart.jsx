@@ -20,7 +20,7 @@ export const ShoppingCart = () => {
               <div key={item.id} className="cart-item">
                 <img src={`/images/${item.product.id}/`} alt="Image not found"/>
                 <div>
-                  <Link to={`/product/${item.product.id}/`}>{item.product.name}</Link>
+                  <Link to={`/product/${item.product.id}`}>{item.product.name}</Link>
                   <div>${item.product.price}</div>
                   <div>Qty: {item.quantity}</div>
                 </div>

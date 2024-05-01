@@ -9,7 +9,7 @@ export const useProduct = (id) => {
   const navigate = useNavigate();
 
   async function loadProduct() {
-    const {product} = await api.get(`/products/${id}`);
+    const {product} = await api.get(`/products/${id}/`);
     setProduct(product);
     setTimeout(() => {
       setLoading(false);
@@ -18,7 +18,7 @@ export const useProduct = (id) => {
 
   async function addToCart(quantity) {
     const res = await api.post(`/shopping_cart/${product.id}/`, {quantity});
-    navigate("/shopping_cart/");
+    navigate("/shopping_cart");
   }
 
   useEffect(() => {

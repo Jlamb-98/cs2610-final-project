@@ -37,7 +37,7 @@ export const useShoppingCart = () => {
     for (const item of shoppingCart) {
       deleteCartItem(item);
     }
-    navigate("/checkout/");
+    navigate("/checkout");
   }
 
   useEffect(() => {

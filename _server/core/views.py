@@ -135,3 +135,11 @@ def my_products(req: HttpRequest):
     products = [model_to_dict(product, exclude='customer') for product in products]
 
     return JsonResponse({"products": products})
+
+@login_required
+def my_product(req: HttpRequest, id: int):
+    product = Product.objects.filter(id=id, user=req.user).first()
+    if not product:
+        return JsonResponse({"success": False})
+    product = model_to_dict(product, exclude='customer')
+    return JsonResponse({"success": True, "product": product})
