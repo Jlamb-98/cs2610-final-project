@@ -122,7 +122,9 @@ def shopping_cart(req: HttpRequest, id: int):
         item.save()
         return JsonResponse({"success": True})
     if req.method == "DELETE":
-        item = CartItem.objects.get(id=id)
+        item = CartItem.objects.filter(id=id, customer=req.user).first()
+        if not item:
+            return JsonResponse({"success": False})
         item.delete()
         return JsonResponse({"success": True})
     if req.method == "PUT":
