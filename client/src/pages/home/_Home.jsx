@@ -13,17 +13,20 @@ export const Home = () => {
   }
 
   return (
-    <div className="product-list">
-      {
-        products.map(product => (
-          <div key={product.id} className="product">
-            <img src={`/images/${product.id}/`} alt="Image not found"/>
-            <Link to={`/product/${product.id}`} className="name">{product.name}</Link>
-            <span>${product.price}</span>
-            <span>{product.description}</span>
-          </div>
-        ))
-      }
-    </div>
+    <>
+      <h2>Recent Listings</h2>
+      <div className="product-list">
+        {
+          products.map(product => (
+            <div key={product.id} className="product">
+              <img src={`/images/${product.id}/`} alt="Image not found"/>
+              <Link to={`/product/${product.id}`} className="name">{product.name}</Link>
+              <span>${product.price}</span>
+              <span>{product.description}</span>
+            </div>
+          ))
+        }
+      </div>
+    </>
   )
 }

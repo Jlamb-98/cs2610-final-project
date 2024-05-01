@@ -94,26 +94,29 @@ export const NewProduct = () => {
   }
 
   return (
-    <form onSubmit={saveProduct}>
-      <div>
-        <label htmlFor="name">Product Name </label>
-        <input type="text" id="name" value={name} onChange={e => setName(e.target.value)}/>
-      </div>
-      <div>
-        <label htmlFor="price">Price (USD$) </label>
-        <input type="number" id="price" min={1} value={price} onChange={e => setPrice(e.target.value)}/>
-      </div>
-      <div>
-        <label htmlFor="quantity">Quantity </label>
-        <input type="number" id="quantity" min={1} value={quantity} onChange={e => setQuantity(e.target.value)}/>
-      </div>
-      <label htmlFor="description">Description </label>
-      <textarea type="textarea" id="description" rows={10} value={description} onChange={e => setDescription(e.target.value)}/>
-      <input type="file" onChange={selectImage} accept="image/*"/>
-      <div className="button">
-        <button className="rounded-button">List Product</button>
-      </div>
-      <span className="error-message">{errorMessage}</span>
-    </form>
+    <>
+      <h2>List New Product</h2>
+      <form onSubmit={saveProduct}>
+        <div>
+          <label htmlFor="name">Product Name </label>
+          <input type="text" id="name" value={name} onChange={e => setName(e.target.value)}/>
+        </div>
+        <div>
+          <label htmlFor="price">Price (USD$) </label>
+          <input type="number" id="price" min={1} value={price} onChange={e => setPrice(e.target.value)}/>
+        </div>
+        <div>
+          <label htmlFor="quantity">Quantity </label>
+          <input type="number" id="quantity" min={1} value={quantity} onChange={e => setQuantity(e.target.value)}/>
+        </div>
+        <label htmlFor="description">Description </label>
+        <textarea type="textarea" id="description" rows={10} value={description} onChange={e => setDescription(e.target.value)}/>
+        <input type="file" onChange={selectImage} accept="image/*"/>
+        <div className="button">
+          <button className="rounded-button">List Product</button>
+        </div>
+        <span className="error-message">{errorMessage}</span>
+      </form>
+    </>
   )
 }

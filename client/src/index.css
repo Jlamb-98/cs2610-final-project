@@ -8,7 +8,9 @@ body {
 
 main {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
 }
 
 a {
@@ -91,7 +93,7 @@ textarea {
 .product-page {
   display: flex;
   flex-direction: row;
-  width: 1000px;
+  width: 800px;
   height: 500px;
   padding: 16px;
   gap: 26px;
@@ -140,6 +142,11 @@ img {
 .cart-item > img {
   width: 200px;
   height: fit-content;
+}
+
+.product-page > img {
+  max-height: 500px;
+  max-width: 800px;
 }
 
 .rounded-button {
