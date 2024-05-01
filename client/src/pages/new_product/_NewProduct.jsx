@@ -33,7 +33,6 @@ export const NewProduct = () => {
   }, []);
 
   function selectImage(e) {
-    // TODO: can I add multiple images?
     setImage(e.target.files[0]);
   }
 

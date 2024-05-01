@@ -127,9 +127,6 @@ def shopping_cart(req: HttpRequest, id: int):
             return JsonResponse({"success": False})
         item.delete()
         return JsonResponse({"success": True})
-    if req.method == "PUT":
-        # TODO: update product in user's cart (probably just quantity)
-        pass
 
 @login_required
 def my_products(req: HttpRequest):
